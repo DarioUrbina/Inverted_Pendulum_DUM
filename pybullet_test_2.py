@@ -9,6 +9,7 @@ cubeStartPos = [0,0,1]
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 #boxId = p.loadURDF("r2d2.urdf",cubeStartPos, cubeStartOrientation)
 boxId = p.loadURDF("r2d2_Dario.urdf",cubeStartPos, cubeStartOrientation)
+#boxId = p.loadURDF("Practising1",cubeStartPos, cubeStartOrientation)
 #boxId = p.loadURDF("sphere_with_restitution.urdf",cubeStartPos, cubeStartOrientation)
 
 for i in range (10000):
