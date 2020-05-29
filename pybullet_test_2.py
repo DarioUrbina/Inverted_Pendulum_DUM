@@ -4,13 +4,29 @@ import pybullet_data
 physicsClient = p.connect(p.GUI)#or p.DIRECT for non-graphical version
 p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
 p.setGravity(0,0,-10)
+
+
+#maxForce = 0
+#mode = p.VELOCITY_CONTROL
+#p.setJointMotorControl2(physicsClient, jointIndex, controlMode=mode, force=0)
+
+
+
 planeId = p.loadURDF("plane.urdf")
 cubeStartPos = [0,0,1]
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 #boxId = p.loadURDF("r2d2.urdf",cubeStartPos, cubeStartOrientation)
 boxId = p.loadURDF("r2d2_Dario.urdf",cubeStartPos, cubeStartOrientation)
+#boxId = p.loadURDF("mini_cheetah",cubeStartPos, cubeStartOrientation)
 #boxId = p.loadURDF("Practising1",cubeStartPos, cubeStartOrientation)
 #boxId = p.loadURDF("sphere_with_restitution.urdf",cubeStartPos, cubeStartOrientation)
+
+for i in range(p.getNumJoints(boxId)):
+  print(p.getJointInfo(boxId, i))
+
+for joint in range(p.getNumJoints(boxId)):
+  p.setJointMotorControl2(boxId, joint, p.VELOCITY_CONTROL, targetVelocity=0, force=0)
+  p.getJointInfo(boxId, joint)
 
 for i in range (10000):
     p.stepSimulation()
