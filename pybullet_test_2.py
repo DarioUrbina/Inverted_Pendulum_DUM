@@ -15,13 +15,25 @@ boxId = p.loadURDF("r2d2_Dario.urdf",cubeStartPos, cubeStartOrientation, useFixe
 for i in range(p.getNumJoints(boxId)):
   print(p.getJointInfo(boxId, i))
 
-for joint in range(p.getNumJoints(boxId)):
-  p.setJointMotorControl2(boxId, joint, p.VELOCITY_CONTROL, targetVelocity=10, force=10)
-  p.getJointInfo(boxId, joint)
+#for joint in range(p.getNumJoints(boxId)):
+  #p.setJointMotorControl2(boxId, joint, p.VELOCITY_CONTROL, targetVelocity=10, force=10)
+  ##p.getJointInfo(boxId, joint)
 
 for i in range (10000):
     p.stepSimulation()
     time.sleep(1./240.)
+    p.setJointMotorControl2(boxId, 0, p.VELOCITY_CONTROL, targetVelocity=0, force=0)
+    p.setJointMotorControl2(boxId, 2, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+    p.setJointMotorControl2(boxId, 4, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+    p.setJointMotorControl2(boxId, 6, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+    p.setJointMotorControl2(boxId, 8, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+    p.setJointMotorControl2(boxId, 10, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+    p.setJointMotorControl2(boxId, 12, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+    p.setJointMotorControl2(boxId, 14, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+    p.setJointMotorControl2(boxId, 16, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+
+
+    
 cubePos, cubeOrn = p.getBasePositionAndOrientation(boxId)
 print(cubePos,cubeOrn)
 p.disconnect()
