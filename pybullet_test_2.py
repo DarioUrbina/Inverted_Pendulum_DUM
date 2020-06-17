@@ -1,3 +1,9 @@
+#Things to consider:
+#Motors can be activated with different force levels; but considering that they go through activation cycles, the limb present "tremour" when
+#moving if the force is too big. THis might be die to leg inertia.
+
+
+
 import pybullet as p
 import time
 import pybullet_data
@@ -33,7 +39,7 @@ for i in range (steps):
                 #if mot == 4:
                 #    activation = m.cos(i)
                 #else:
-                activation = m.sin(i)
+                activation = (m.sin(i))
                 if activation < 0:
                     if (activation) > -.7:
                         activation = -.7
@@ -52,7 +58,7 @@ for i in range (steps):
                 #else:
                     #print("jjjjjjjjjjjjjjjjjjjjj")
                     #activation = m.cos(i)
-                activation = m.sin(i+(3.14/2))
+                activation = (m.sin(i+(3.14/2)))
                 if activation < 0:
                     if (activation) > -.7:
                         activation = -.7
