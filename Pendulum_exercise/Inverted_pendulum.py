@@ -4,6 +4,11 @@ import time
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf")
 
+cubeStartPos = [0,0,.05]
+
+cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
+quadruped = p.loadURDF("Pendulum.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
+
 
 """
 
