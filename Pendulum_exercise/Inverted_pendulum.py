@@ -1,5 +1,7 @@
 import pybullet as p
 import time
+import math as m
+import numpy as np
 
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf")
@@ -7,18 +9,14 @@ plane = p.loadURDF("plane.urdf")
 cubeStartPos = [0,0,.05]
 
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-quadruped = p.loadURDF("Pendulum.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
+pendulum = p.loadURDF("Pendulum.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
 
+for i in range (2000):
+    p.stepSimulation()
+    time.sleep(1./240.)
 
+p.disconnect()
 """
-
-#import data_dario
-#import pybullet_data
-#import time
-
-import math as m
-import numpy as np
-
 
 #p.setAdditionalSearchPath(data_dario.getDataPath())
 #p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
