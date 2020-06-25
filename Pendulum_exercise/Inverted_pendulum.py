@@ -6,9 +6,10 @@ import numpy as np
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf")
 
-cubeStartPos = [0,0,.05]
+cubeStartPos = [-2.65,0,.4]
 
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
+#pendulum = p.loadURDF("r2d2_Dario.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
 pendulum = p.loadURDF("Pendulum.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
 
 for i in range (2000):

@@ -2,8 +2,6 @@
 #Motors can be activated with different force levels; but considering that they go through activation cycles, the limb present "tremour" when
 #moving if the force is too big. THis might be die to leg inertia.
 
-
-
 import pybullet as p
 import time
 import pybullet_data
