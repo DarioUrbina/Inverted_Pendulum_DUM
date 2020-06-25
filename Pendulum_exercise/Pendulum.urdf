@@ -13,13 +13,13 @@
   <link name="Base">
     <visual>
       <geometry>
-        <box size="0.3 0.3 .8"/>
+        <box size="0.3 0.3 1.6"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.3 0.3 .8"/>
+        <box size="0.3 0.3 1.6"/>
       </geometry>
     </collision>
     <inertial>
@@ -50,20 +50,20 @@
   <joint name="Base_rail" type="fixed">
     <parent link="Base"/>
     <child link="rail"/>
-    <origin rpy="0 -1.57075 0" xyz="2.65 0 .3"/>
+    <origin rpy="0 -1.57075 0" xyz="2.65 0 .75"/>
   </joint>
   
   
   <link name="Base2">
     <visual>
       <geometry>
-        <box size="0.3 0.3 .8"/>
+        <box size="0.3 0.3 1.6"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.3 0.3 .8"/>
+        <box size="0.3 0.3 1.6"/>
       </geometry>
     </collision>
     <inertial>
@@ -76,14 +76,87 @@
     <joint name="Rail_Base2" type="fixed">
     <parent link="rail"/>
     <child link="Base2"/>
-    <origin rpy="0 -1.5707 0" xyz="-.3 0 -2.65"/>
-  </joint>
-  <!--  
-  <joint name="Base_rail" type="fixed">
-    <parent link="Base"/>
-    <child link="rail"/>
-    <origin rpy="0 -1.57075 0" xyz="2.5 0 .78"/>
+    <origin rpy="0 -1.5707 0" xyz="-.75 0 -2.65"/>
   </joint>
 
-  -->
+  <link name="cart">
+    <visual>
+      <geometry>
+        <box size="0.15 0.15 .4"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.15 0.15 .4"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="rail_cart" type="prismatic">
+    <axis xyz="0 0 1"/>
+    <parent link="rail"/>
+    <child link="cart"/>
+    <limit effort="0" lower="-2" upper="2" velocity="25"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+
+  <link name="pendulumAxis">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 .1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 .1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="cart_pendulum" type="revolute">
+    <axis xyz="0 1 0"/>
+    <parent link="cart"/>
+    <child link="pendulumAxis"/>
+    <limit effort="10.0" lower="1" upper="0" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0 .15 0"/>
+  </joint>
+
+  <link name="pendulum">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 .8"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 .8"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="pendulumAxis_pendulum" type="fixed">
+    <parent link="pendulumAxis"/>
+    <child link="pendulum"/>
+    <origin rpy="0 0 0" xyz="0 0 0.45"/>
+  </joint>
+  
+  
 </robot>
