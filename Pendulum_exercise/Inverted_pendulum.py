@@ -13,11 +13,19 @@ cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 pendulum = p.loadURDF("Pendulum.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
 p.setGravity(0,0,-10)
 
-for i in range (2000):
+for joint in range(p.getNumJoints(pendulum)):
+    p.setJointMotorControl2(pendulum, joint, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
+    p.getJointInfo(pendulum, joint)
+
+
+
+for i in range (20000):
     p.stepSimulation()
     time.sleep(1./240.)
 
 p.disconnect()
+
+
 """
 
 #p.setAdditionalSearchPath(data_dario.getDataPath())
