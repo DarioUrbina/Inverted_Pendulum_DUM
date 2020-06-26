@@ -130,7 +130,7 @@
     <parent link="cart"/>
     <child link="pendulumAxis"/>
     <limit effort="0" lower="1" upper="0" velocity="205"/>
-    <origin rpy="0 0 0" xyz="0 .15 0"/>
+    <origin rpy="0 1.570796 0" xyz="0 .15 0"/>
   </joint>
 
   <link name="pendulum">

@@ -7,11 +7,12 @@ p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf")
 
 cubeStartPos = [-2.65,0,.4]
-
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 #pendulum = p.loadURDF("r2d2_Dario.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
 pendulum = p.loadURDF("Pendulum.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
 p.setGravity(0,0,-10)
+
+motorForce=700
 
 for i in range(p.getNumJoints(pendulum)):
     info=p.getJointInfo(pendulum, i)
@@ -28,12 +29,18 @@ for joint in range(p.getNumJoints(pendulum)):
 
 for i in range (20000):
     p.stepSimulation()
-    info=p.getJointInfo(pendulum, 3)
-    info2=p.getJointState(pendulum,info[0])
-    print(info2[0])
+    #info=p.getJointInfo(pendulum, 3)
+    pendulum_angle=p.getJointState(pendulum,3)
+    print(pendulum_angle[0])
+    error = 0-pendulum_angle[0]
+    print("error:")
+    print(error)
+    if error < 0:
+        p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=-motorForce)
+    if error > 0:
+        p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=motorForce)
     
     time.sleep(1./240.)
-    #p.setJointMotorControl2(boxId, 2, p.VELOCITY_CONTROL, targetVelocity=5, force=(activation_profile[i][0])*force_scale)
 p.disconnect()
 
 
