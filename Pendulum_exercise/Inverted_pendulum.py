@@ -13,8 +13,12 @@ pendulum = p.loadURDF("Pendulum.urdf",cubeStartPos, cubeStartOrientation, useFix
 p.setGravity(0,0,-10)
 
 motorForce=700
-derivative_gain = 1200
-proportional_gain = 1000
+
+proportional_gain = -1000
+integral_gain = -500
+derivative_gain = 1400
+
+previous_pendulum_angle = 0
 
 for i in range(p.getNumJoints(pendulum)):
     info=p.getJointInfo(pendulum, i)
@@ -37,16 +41,23 @@ for i in range (20000):
     delta_error = 0-pendulum_angle[0]
     print("delta_Error:")
     print(delta_error)
+
+    #PROPPORTIONAL
+    p_correction = proportional_gain * pendulum_angle[0]
+
+    #INTEGRAL
+    
+    i_correction = integral_gain * (previous_pendulum_angle + pendulum_angle[0])
+    previous_pendulum_angle = pendulum_angle[0]
+
     #DERIVATIVE
     d_correction = derivative_gain * delta_error
-    #PROPPORTIONAL
-    #p_correction = proportional_gain * pendulum_angle[0]
-    p_correction = 0
 
+    
     
 
     #Input Signal
-    u = d_correction + p_correction
+    u = p_correction + i_correction + d_correction 
     
     """
     if delta_error < 0:
