@@ -13,6 +13,8 @@ pendulum = p.loadURDF("Pendulum.urdf",cubeStartPos, cubeStartOrientation, useFix
 p.setGravity(0,0,-10)
 
 motorForce=700
+derivative_gain = 1200
+proportional_gain = 1000
 
 for i in range(p.getNumJoints(pendulum)):
     info=p.getJointInfo(pendulum, i)
@@ -32,14 +34,31 @@ for i in range (20000):
     #info=p.getJointInfo(pendulum, 3)
     pendulum_angle=p.getJointState(pendulum,3)
     print(pendulum_angle[0])
-    error = 0-pendulum_angle[0]
-    print("error:")
-    print(error)
-    if error < 0:
-        p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=-motorForce)
-    if error > 0:
-        p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=motorForce)
+    delta_error = 0-pendulum_angle[0]
+    print("delta_Error:")
+    print(delta_error)
+    #DERIVATIVE
+    d_correction = derivative_gain * delta_error
+    #PROPPORTIONAL
+    #p_correction = proportional_gain * pendulum_angle[0]
+    p_correction = 0
+
     
+
+    #Input Signal
+    u = d_correction + p_correction
+    
+    """
+    if delta_error < 0:
+        p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=-motorForce)
+    else:
+        p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=motorForce)
+    """
+    p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=u)
+
+    
+
+        
     time.sleep(1./240.)
 p.disconnect()
 
