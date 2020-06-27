@@ -14,8 +14,8 @@ p.setGravity(0,0,-10)
 
 motorForce=700
 
-proportional_gain = -1000
-integral_gain = -100
+proportional_gain = -1500
+integral_gain = -1000
 derivative_gain = 3000
 
 previous_pendulum_angle = 0
@@ -31,6 +31,7 @@ for joint in range(p.getNumJoints(pendulum)):
     p.setJointMotorControl2(pendulum, joint, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
     p.getJointInfo(pendulum, joint)
 
+p.changeDynamics(pendulum, linkIndex=1 , mass=100, restitution=.1)
 
 
 for i in range (20000):
@@ -46,29 +47,16 @@ for i in range (20000):
     p_correction = proportional_gain * pendulum_angle[0]
 
     #INTEGRAL
-    
     i_correction = integral_gain * (previous_pendulum_angle + pendulum_angle[0])
     previous_pendulum_angle = pendulum_angle[0]
 
     #DERIVATIVE
     d_correction = derivative_gain * delta_error
-
     
-    
-
     #Input Signal
     u = p_correction + i_correction + d_correction 
     
-    """
-    if delta_error < 0:
-        p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=-motorForce)
-    else:
-        p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=motorForce)
-    """
     p.setJointMotorControl2(pendulum, 2, p.VELOCITY_CONTROL, targetVelocity=10, force=u)
-
-    
-
         
     time.sleep(1./240.)
 p.disconnect()
