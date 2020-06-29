@@ -62,15 +62,4 @@ for i in range (20000):
 p.disconnect()
 
 
-"""
 
-#p.setAdditionalSearchPath(data_dario.getDataPath())
-#p.setAdditionalSearchPath(pybullet_data.getDataPath()) #optionally
-
-p.setTimeStep(1./500)
-#planeId = p.loadURDF("plane.urdf")
-
-cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-quadruped = p.loadURDF("r2d2_Dario",cubeStartPos, cubeStartOrientation, useFixedBase=1) 
-
-"""
