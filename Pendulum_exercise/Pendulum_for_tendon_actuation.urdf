@@ -223,7 +223,7 @@
 
   <!--Link 7-->
 
-  <link name="tendon1">
+  <link name="tendon1_1">
     <visual>
       <geometry>
         <cylinder length=".05" radius=".1"/>
@@ -241,15 +241,70 @@
     </inertial>
   </link>
 
-  <joint name="pulley1_tendon1" type="revolute">
+  <joint name="pulley1_tendon1_1" type="revolute">
     <axis xyz="0 0 1"/>
     <parent link="pulley1"/>
-    <child link="tendon1"/>
-    <limit effort="0" lower="-1" upper="0" velocity="0"/>
-    <origin rpy="0 0 0" xyz="0 1.2 0"/>
+    <child link="tendon1_1"/>
+    <limit effort="0" lower="1" upper="-1" velocity="0"/>
+    <origin rpy="0 0 0" xyz=".1 1.1 0"/>
   </joint>
-  
-  
+
+  <!--Link 8-->
+
+  <link name="tendon1_2">
+    <visual>
+      <geometry>
+        <cylinder length=".05" radius=".1"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".05" radius=".1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+
+  <joint name="tendon1_1_tendon1_2" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="tendon1_1"/>
+    <child link="tendon1_2"/>
+    <limit effort="0" lower="-1" upper="0" velocity="0"/>
+    <origin rpy="0 0 0" xyz=".2 .4 0"/>
+  </joint>
+    
+
+    <!--Link 9-->
+
+    <link name="tendon1_3">
+      <visual>
+        <geometry>
+          <cylinder length=".05" radius=".1"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder length=".05" radius=".1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="1"/>
+        <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+      </inertial>
+    </link>
+
+    <joint name="tendon1_2_tendon1_3" type="revolute">
+      <axis xyz="0 0 1"/>
+      <parent link="tendon1_2"/>
+      <child link="tendon1_3"/>
+      <limit effort="0" lower="-1" upper="0" velocity="0"/>
+      <origin rpy="0 0 0" xyz=".2 .4 0"/>
+    </joint>
   
   
   
