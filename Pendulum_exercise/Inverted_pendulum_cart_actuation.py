@@ -23,8 +23,8 @@ previous_pendulum_angle = 0
 for i in range(p.getNumJoints(pendulum)):
     info=p.getJointInfo(pendulum, i)
     print(p.getJointInfo(pendulum, i))
-    print(info[0])
-    print(p.getJointState(pendulum,info[0]))
+    #print(info[0])
+    #print(p.getJointState(pendulum,info[0]))
     #print(info([ info[i] for i in [0,1] ]))
 
 for joint in range(p.getNumJoints(pendulum)):
@@ -37,11 +37,14 @@ p.changeDynamics(pendulum, linkIndex=1 , mass=100, restitution=.1)
 for i in range (20000):
     p.stepSimulation()
     #info=p.getJointInfo(pendulum, 3)
-    pendulum_angle=p.getJointState(pendulum,3)
-    print(pendulum_angle[0])
+    pendulum_angle=p.getJointState(pendulum,4)
+    cart_position=p.getJointState(pendulum,4)
+    #print(pendulum_angle[0])
+    #print("Cart_position:")
+    print(cart_position[0])
     delta_error = 0-pendulum_angle[0]
-    print("delta_Error:")
-    print(delta_error)
+    #print("Delta_Error:")
+    #print(delta_error)
 
     #PROPPORTIONAL
     p_correction = proportional_gain * pendulum_angle[0]
@@ -56,7 +59,9 @@ for i in range (20000):
     #Input Signal
     u = p_correction + i_correction + d_correction 
     
-    p.setJointMotorControl2(pendulum, 2, p.VELOCITY_CONTROL, targetVelocity=10, force=u)
+    p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=u)
+
+    
         
     time.sleep(1./240.)
 p.disconnect()
