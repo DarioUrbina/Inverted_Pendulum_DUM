@@ -13,13 +13,13 @@
   <link name="Base">
     <visual>
       <geometry>
-        <box size="0.3 0.3 1.6"/>
+        <box size="0.3 0.3 3"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.3 0.3 1.6"/>
+        <box size="0.3 0.3 3"/>
       </geometry>
     </collision>
     <inertial>
@@ -51,20 +51,20 @@
   <joint name="Base_rail" type="fixed">
     <parent link="Base"/>
     <child link="rail"/>
-    <origin rpy="0 -1.57075 0" xyz="2.65 0 .75"/>
+    <origin rpy="0 -1.57075 0" xyz="2.65 0 1.4"/>
   </joint>
 
 <!--Link 1-->  
   <link name="Base2">
     <visual>
       <geometry>
-        <box size="0.3 0.3 1.6"/>
+        <box size="0.3 0.3 3"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.3 0.3 1.6"/>
+        <box size="0.3 0.3 3"/>
       </geometry>
     </collision>
     <inertial>
@@ -77,7 +77,7 @@
     <joint name="Rail_Base2" type="fixed">
     <parent link="rail"/>
     <child link="Base2"/>
-    <origin rpy="0 -1.5707 0" xyz="-.75 0 -2.65"/>
+    <origin rpy="0 -1.5707 0" xyz="-1.4 0 -2.65"/>
   </joint>
 <!--Link 2-->
   <link name="cart">
@@ -158,6 +158,66 @@
     <child link="pendulum"/>
     <origin rpy="0 0 0" xyz="0 0 0.45"/>
   </joint>
-  
-  
+
+  <!--Link 5-->
+  <link name="pulley1">
+    <visual>
+      <geometry>
+        <cylinder length=".05" radius="1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".05" radius="1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <!--
+  <joint name="cart_tendon1" type="spherical">
+    <axis xyz="0 1 0"/>
+    <parent link="cart"/>
+    <child link="tendon1"/>
+    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <origin rpy="0 0 0" xyz="0 .15 0"/>
+  </joint>
+  -->
+  <joint name="Base_pulley1" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="Base"/>
+    <child link="pulley1"/>
+    <limit effort="0" lower="-1" upper="0" velocity="0"/>
+    <origin rpy="1.570796 0 0" xyz="0 -.3 .4"/>
+  </joint>
+
+  <!--Link 6-->
+  <link name="pulley2">
+    <visual>
+      <geometry>
+        <cylinder length=".05" radius="1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".05" radius="1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+
+  <joint name="Base2_pulley2" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="Base2"/>
+    <child link="pulley2"/>
+    <limit effort="0" lower="-1" upper="0" velocity="0"/>
+    <origin rpy="1.570796 0 0" xyz="0 -.3 -.4"/>
+  </joint>
 </robot>
