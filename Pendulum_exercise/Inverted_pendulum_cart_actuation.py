@@ -21,6 +21,7 @@ derivative_gain = 3000
 previous_pendulum_angle = 0
 
 for i in range(p.getNumJoints(pendulum)):
+    """If more links or joints are added, the joint indexes change"""
     info=p.getJointInfo(pendulum, i)
     print(p.getJointInfo(pendulum, i))
     #print(info[0])
@@ -36,15 +37,15 @@ p.changeDynamics(pendulum, linkIndex=1 , mass=100, restitution=.1)
 
 for i in range (20000):
     p.stepSimulation()
-    #info=p.getJointInfo(pendulum, 3)
+    #info=p.getJointInfo(pendulum, 4)
     pendulum_angle=p.getJointState(pendulum,4)
-    cart_position=p.getJointState(pendulum,4)
+    cart_position=p.getJointState(pendulum,3)
     #print(pendulum_angle[0])
-    #print("Cart_position:")
+    print("Cart_position:")
     print(cart_position[0])
-    delta_error = 0-pendulum_angle[0]
-    #print("Delta_Error:")
-    #print(delta_error)
+    angle_delta_error = 0-pendulum_angle[0]
+    print("Angle_Delta_Error:")
+    print(angle_delta_error)
 
     #PROPPORTIONAL
     p_correction = proportional_gain * pendulum_angle[0]
@@ -54,7 +55,7 @@ for i in range (20000):
     previous_pendulum_angle = pendulum_angle[0]
 
     #DERIVATIVE
-    d_correction = derivative_gain * delta_error
+    d_correction = derivative_gain * angle_delta_error
     
     #Input Signal
     u = p_correction + i_correction + d_correction 

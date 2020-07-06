@@ -126,11 +126,11 @@
     </inertial>
   </link>
 
-  <joint name="cart_pendulum" type="revolute">
-    <axis xyz="0 1 0"/>
+  <joint name="cart_pendulum" type="fixed">
+    <!--axis xyz="0 1 0"/-->
     <parent link="cart"/>
     <child link="pendulumAxis"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <!--limit effort="0" lower="1" upper="0" velocity="205"/-->
     <origin rpy="0 1.570796 0" xyz="0 .15 0"/>
   </joint>
 <!--Link 4-->
