@@ -18,7 +18,14 @@ proportional_gain = -1500
 integral_gain = -1000
 derivative_gain = 3000
 
+"""to keep cart centered: """
+
+proportional_gain_2 = 800
+integral_gain_2 = 0
+derivative_gain_2 = 0
+
 previous_pendulum_angle = 0
+previous_cart_position = 0
 
 for i in range(p.getNumJoints(pendulum)):
     """If more links or joints are added, the joint indexes change"""
@@ -44,6 +51,7 @@ for i in range (20000):
     print("Cart_position:")
     print(cart_position[0])
     angle_delta_error = 0-pendulum_angle[0]
+    #cart_position_delta_error = 0-cart_position[0]
     print("Angle_Delta_Error:")
     print(angle_delta_error)
 
@@ -56,9 +64,22 @@ for i in range (20000):
 
     #DERIVATIVE
     d_correction = derivative_gain * angle_delta_error
+
+    """to keep cart centered"""
+    #PROPPORTIONAL for cart position
+    p_correction_2 = proportional_gain_2 * cart_position[0]
+
+    #INTEGRAL for cart position
+    i_correction_2 = integral_gain_2 * (previous_cart_position + cart_position[0])
+    previous_cart_position = cart_position[0]
+
+    #DERIVATIVE for cart position
+    d_correction_2 = derivative_gain_2 * (-cart_position[0])
+    """end of to keep cart centered"""
     
     #Input Signal
-    u = p_correction + i_correction + d_correction 
+    u = p_correction + i_correction + d_correction
+    u = u + p_correction_2 + i_correction_2 + d_correction_2
     
     p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=u)
 
