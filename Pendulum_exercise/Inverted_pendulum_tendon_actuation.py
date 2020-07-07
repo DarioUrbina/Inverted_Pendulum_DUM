@@ -80,7 +80,7 @@ for i in range (20000):
     #Input Signal
     u = p_correction + i_correction + d_correction
     u = u + p_correction_2 + i_correction_2 + d_correction_2
-    
+    u=0
     p.setJointMotorControl2(pendulum, 3, p.VELOCITY_CONTROL, targetVelocity=10, force=u)
 
     
