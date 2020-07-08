@@ -57,7 +57,7 @@
   <link name="base3">
     <visual>
       <geometry>
-        <box size="0.3 0.3 .9"/>                          <!--Short base-->
+        <box size="0.3 0.3 .89"/>                          <!--Short base-->
       </geometry>
       <material name="white"/>
     </visual>
@@ -76,7 +76,7 @@
   <joint name="base2_base3" type="fixed">
     <parent link="base2"/>
     <child link="base3"/>
-    <origin rpy="0 1.57075 0" xyz="-.30 0 .65"/>    <!--ANGLE DISPLACEMENT!!!-->
+    <origin rpy="0 1.57075 0" xyz="-.295 0 .65"/>    <!--ANGLE DISPLACEMENT!!!-->
   </joint>
 
   <link name="base4">
@@ -157,7 +157,7 @@
   <joint name="base3_base6" type="fixed">
     <parent link="base3"/>
     <child link="base6"/>
-    <origin rpy="0 1.57075 0" xyz=".1 .1 -.61"/>
+    <origin rpy="0 1.57075 0" xyz=".1 .09 -.61"/>
   </joint>
   
 
@@ -180,12 +180,14 @@
     </inertial>
   </link>
 
-  <joint name="Base_axis1" type="fixed"> <!--Make revolute joint later-->
+  <joint name="Base_axis1" type="revolute"> <!--Make revolute joint later-->
+    <axis xyz="0 1 0"/>
     <parent link="Base"/>
     <child link="axis1"/>
+    <limit effort="0" lower="1" upper="0" velocity="205"/>
     <origin rpy="0 0 0" xyz=".1 .2 .45"/>
   </joint>
-
+  
   <link name="arm1">
     <visual>
       <geometry>
@@ -230,9 +232,11 @@
     </inertial>
   </link>
 
-  <joint name="arm1_axis2" type="fixed"><!--Make revolute joint later-->
+  <joint name="arm1_axis2" type="revolute"><!--Make revolute joint later-->
+    <axis xyz="0 1 0"/>
     <parent link="arm1"/>
     <child link="axis2"/>
+    <limit effort="0" lower="1" upper="0" velocity="205"/>
     <origin rpy="0 0 0" xyz="0 .1 .45"/>
   </joint>
 
@@ -280,9 +284,11 @@
     </inertial>
   </link>
 
-  <joint name="arm2_axis3" type="fixed"><!--Make revolute joint later-->
+  <joint name="arm2_axis3" type="revolute"><!--Make revolute joint later-->
+    <axis xyz="0 1 0"/>
     <parent link="arm2"/>
     <child link="axis3"/>
+    <limit effort="0" lower="1" upper="0" velocity="205"/>
     <origin rpy="0 0 0" xyz="0 0 .55"/>
   </joint>
 
@@ -331,11 +337,44 @@
   </link>
 
   <joint name="arm3_axis4" type="fixed">
-    <!--Make revolute joint later-->
+    <!--DO NOT Make revolute joint later-->
+    <!--axis xyz="0 1 0"/-->
     <parent link="arm3"/>
     <child link="axis4"/>
+    <!--limit effort="0" lower="1" upper="0" velocity="205"/-->
     <origin rpy="0 0 0" xyz="0 0 .55"/>
   </joint>
+
+
+
+  <link name="axis5">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="axis4_axis5" type="revolute">
+    <axis xyz="0 1 0"/>
+    <parent link="axis4"/>
+    <child link="axis5"/>
+    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <origin rpy="0 0 0" xyz="0 -.1 0"/>
+  </joint>
+
+
 
   <!--cyclic body because of this joint!-->
   <!--Make revolute joint later:-->
