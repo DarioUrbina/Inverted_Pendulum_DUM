@@ -243,13 +243,13 @@
   <link name="arm2">
     <visual>
       <geometry>
-        <box size="0.1 0.1 1"/>
+        <box size="0.1 0.1 2"/>                                 <!--aparatus legnth increment-->
       </geometry>
       <material name="other"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.1 0.1 1"/>
+        <box size="0.1 0.1 2"/>                                 <!--aparatus legnth increment-->
       </geometry>
     </collision>
     <inertial>
@@ -262,7 +262,7 @@
   <joint name="axis2_arm2" type="fixed">
     <parent link="axis2"/>
     <child link="arm2"/>
-    <origin rpy="0 1.57075 0" xyz=".55 0 0"/>    <!--ANGLE DISPLACEMENT!!!-->
+    <origin rpy="0 1.57075 0" xyz="1.05 0 0"/>    <!--ANGLE DISPLACEMENT!!!-->     <!--aparatus legnth increment-->
   </joint>
 
   <link name="axis3">
@@ -289,7 +289,7 @@
     <parent link="arm2"/>
     <child link="axis3"/>
     <limit effort="0" lower="1" upper="0" velocity="205"/>
-    <origin rpy="0 0 0" xyz="0 0 .55"/>
+    <origin rpy="0 0 0" xyz="0 0 1.05"/>                      <!--aparatus legnth increment-->
   </joint>
 
   <link name="arm3">
