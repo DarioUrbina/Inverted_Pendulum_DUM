@@ -32,13 +32,13 @@
   <link name="base2">
     <visual>
       <geometry>
-        <box size="0.3 0.3 1"/>
+        <box size="0.3 0.3 2"/>                 <!--aparatus legnth increment-->
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.3 0.3 1"/>
+        <box size="0.3 0.3 2"/>                 <!--aparatus legnth increment-->
       </geometry>
     </collision>
     <inertial>
@@ -51,7 +51,7 @@
   <joint name="base1_base2" type="fixed">
     <parent link="Base"/>
     <child link="base2"/>
-    <origin rpy="0 1.57075 0" xyz=".65 0 -.35"/>    <!--ANGLE DISPLACEMENT!!!-->
+    <origin rpy="0 1.57075 0" xyz="1.15 0 -.35"/>    <!--ANGLE DISPLACEMENT!!!-->     <!--aparatus legnth increment-->
   </joint>
 
   <link name="base3">
@@ -76,7 +76,7 @@
   <joint name="base2_base3" type="fixed">
     <parent link="base2"/>
     <child link="base3"/>
-    <origin rpy="0 1.57075 0" xyz="-.295 0 .65"/>    <!--ANGLE DISPLACEMENT!!!-->
+    <origin rpy="0 1.57075 0" xyz="-.295 0 1.15"/>    <!--ANGLE DISPLACEMENT!!!-->      <!--aparatus legnth increment-->
   </joint>
 
   <link name="base4">
