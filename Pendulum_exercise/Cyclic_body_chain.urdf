@@ -129,6 +129,106 @@
     <child link="arm1"/>
     <origin rpy="0 0 0" xyz="0 0 .55"/>
   </joint>
+
+  <link name="axis2">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="arm1_axis2" type="fixed"><!--Make revolute joint later-->
+    <parent link="arm1"/>
+    <child link="axis2"/>
+    <origin rpy="0 0 0" xyz="0 .1 .45"/>
+  </joint>
+
+  <link name="arm2">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="axis2_arm2" type="fixed">
+    <parent link="axis2"/>
+    <child link="arm2"/>
+    <origin rpy="0 1.57075 0" xyz=".55 0 0"/>
+  </joint>
+
+  <link name="axis3">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="arm2_axis3" type="fixed"><!--Make revolute joint later-->
+    <parent link="arm2"/>
+    <child link="axis3"/>
+    <origin rpy="0 0 0" xyz="0 0 .55"/>
+  </joint>
+
+  <link name="arm3">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="axis3_arm3" type="fixed">
+    <parent link="axis3"/>
+    <child link="arm3"/>
+    <origin rpy="0 1.57075 0" xyz="0.45 -0.1 0"/>
+  </joint>
   
   
 </robot>
