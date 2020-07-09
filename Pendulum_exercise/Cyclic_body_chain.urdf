@@ -9,6 +9,10 @@
   <material name="other">
     <color rgba="1 0 0.8 1"/>
   </material>
+  <velocity name="vel">
+    <speed spd="50"/>
+  </velocity>
+  
 
   <link name="Base">
     <visual>
@@ -735,7 +739,7 @@
     <axis xyz="0 0 1"/>
     <parent link="axis2"/>
     <child link="cube"/>
-    <limit effort="0" lower="1" upper="0" velocity="50"/>
+    <limit effort="0" lower="1" upper="0" velocity="vel"/>
     <origin rpy="0 0 0" xyz="0 0 .1"/>
   </joint>
 
