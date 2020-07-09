@@ -183,7 +183,7 @@
     <axis xyz="0 0 1"/>
     <parent link="Base"/>
     <child link="pulley1"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="1.57075 0 0" xyz=".1 .21 .45"/>
   </joint>
 
@@ -208,7 +208,7 @@
     <axis xyz="0 0 1"/>
     <parent link="pulley1"/>
     <child link="tendon1_1"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .55 0"/>
   </joint>
 
@@ -233,7 +233,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_1"/>
     <child link="tendon1_2"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -258,7 +258,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_2"/>
     <child link="tendon1_3"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -283,7 +283,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_3"/>
     <child link="tendon1_4"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -308,7 +308,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_4"/>
     <child link="tendon1_5"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -333,7 +333,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_5"/>
     <child link="tendon1_6"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -358,7 +358,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_6"/>
     <child link="tendon1_7"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -383,7 +383,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_7"/>
     <child link="tendon1_8"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -408,7 +408,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_8"/>
     <child link="tendon1_9"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -436,7 +436,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon1_9"/>
     <child link="cart"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="-1.57075 0 0" xyz=".45 0 0"/>
   </joint>
 
@@ -461,7 +461,7 @@
     <axis xyz="0 0 1"/>
     <parent link="cart"/>
     <child link="tendon2_1"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="1.57075 0 0" xyz=".45 0 0"/>
   </joint>
 
@@ -486,7 +486,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon2_1"/>
     <child link="tendon2_2"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -511,7 +511,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon2_2"/>
     <child link="tendon2_3"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -536,7 +536,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon2_3"/>
     <child link="tendon2_4"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -561,7 +561,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon2_4"/>
     <child link="tendon2_5"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -586,7 +586,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon2_5"/>
     <child link="tendon2_6"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -611,7 +611,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon2_6"/>
     <child link="tendon2_7"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -636,7 +636,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon2_7"/>
     <child link="tendon2_8"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -661,7 +661,7 @@
     <axis xyz="0 0 1"/>
     <parent link="tendon2_8"/>
     <child link="tendon2_9"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz=".2 0 0"/>
   </joint>
 
@@ -735,7 +735,7 @@
     <axis xyz="0 0 1"/>
     <parent link="axis2"/>
     <child link="cube"/>
-    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 0 .1"/>
   </joint>
 
