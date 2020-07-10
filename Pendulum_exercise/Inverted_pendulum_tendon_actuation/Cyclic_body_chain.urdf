@@ -745,7 +745,7 @@
     <origin rpy="0 0 -.364" xyz=".2 0 0"/>
   </joint>
 
-  <!--link name="pulley2">
+  <link name="pulley2">
     <visual>
       <geometry>
         <cylinder length=".1" radius=".5"/>
@@ -815,6 +815,6 @@
     <child link="cube"/>
     <limit effort="0" lower="1" upper="0" velocity="vel"/>
     <origin rpy="0 0 0" xyz="0 0 .1"/>
-  </joint-->
+  </joint>
 
 </robot>  
