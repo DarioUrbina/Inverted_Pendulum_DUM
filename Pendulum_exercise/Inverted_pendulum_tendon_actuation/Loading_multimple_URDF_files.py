@@ -3,19 +3,21 @@ import time
 import math as m
 import numpy as np
 import pybullet_data
-
+#so far revised
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf")
 
 cubeStartPos = [-2.15,0,.5]
+cubeStartPos2 = [2.15,0,3]
+
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 
-base_1 = p.loadURDF("Base_1.urdf",cubeStartPos, cubeStartOrientation, flags=p.URDF_USE_SELF_COLLISION)
-base_2 = p.loadURDF("Base_2.urdf",cubeStartPos, cubeStartOrientation, flags=p.URDF_USE_SELF_COLLISION)
+base_1 = p.loadURDF("Base_1.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
+base_2 = p.loadURDF("Base_2.urdf",cubeStartPos2, cubeStartOrientation, flags=p.URDF_USE_SELF_COLLISION)
 #base_1 = p.loadURDF("Cyclic_body_chain.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
 
 cid = p.createConstraint(base_1, -1, base_1, -1, p.JOINT_FIXED, [0, 0, 0], [0, 0, 1], [0, 0, 1])
-cid2 = p.createConstraint(base_2, -1, base_2, -1, p.JOINT_FIXED, [0, 0, 0], [0, 0, 0], [0, 0, 0])
+cid2 = p.createConstraint(base_2, -1, base_1, -1, p.JOINT_FIXED, [0, 0, 0], [0, 0, 0], [0, 0, 0])
 #cid2 = p.createConstraint(base_1, -1, base_1, 0, p.JOINT_FIXED, [0, 0, 1], [0, 0, 1], [0, 0, 1]
 
 p.changeConstraint(cid, [1,1,0], [1,0,0], maxForce=50)
