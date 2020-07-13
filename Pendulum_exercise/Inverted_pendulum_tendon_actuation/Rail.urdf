@@ -14,16 +14,16 @@
   </velocity>
   
 
-  <link name="Base">
+  <link name="Rail">
     <visual>
       <geometry>
-        <box size="0.3 0.3 3"/>
+        <cylinder length="3" radius=".05"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.3 0.3 3"/>
+        <cylinder length="3" radius=".05"/>
       </geometry>
     </collision>
     <inertial>
@@ -32,4 +32,24 @@
       <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
     </inertial>
   </link>
+
+  <!--
+  <link name="pulley1">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".5"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".1" radius=".5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  -->
 </robot>
