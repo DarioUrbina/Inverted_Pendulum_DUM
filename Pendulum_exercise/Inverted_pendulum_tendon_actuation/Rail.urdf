@@ -17,13 +17,13 @@
   <link name="Rail">
     <visual>
       <geometry>
-        <cylinder length="3" radius=".05"/>
+        <cylinder length="4" radius=".05"/>
       </geometry>
       <material name="blue"/>
     </visual>
     <collision>
       <geometry>
-        <cylinder length="3" radius=".05"/>
+        <cylinder length="4" radius=".05"/>
       </geometry>
     </collision>
     <inertial>
