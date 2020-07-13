@@ -2,14 +2,19 @@ import pybullet as p
 import time
 import math as m
 import numpy as np
+import pybullet_data
+
 
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf")
 
 cubeStartPos = [-2.15,0,.5]
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
+
 #pendulum = p.loadURDF("r2d2_Dario.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1)
-pendulum = p.loadURDF("Cyclic_body_chain.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
+base_1 = p.loadURDF("Base_1.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
+base_2 = p.loadURDF("Base_2.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
+
 p.setGravity(0,0,0)
 
 motorForce=700
@@ -22,21 +27,28 @@ motorForce=700
 
 #previous_pendulum_angle = 0    previous_cart_position = 0
 
-for i in range(p.getNumJoints(pendulum)):
+for i in range(p.getNumJoints(base_1)):
     """If more links or joints are added, the joint indexes change"""
-    info=p.getJointInfo(pendulum, i)
-    print(p.getJointInfo(pendulum, i))
+    info=p.getJointInfo(base_1, i)
+    print(p.getJointInfo(base_1, i))
     #print(info[0])    #print(p.getJointState(pendulum,info[0]))    #print(info([ info[i] for i in [0,1] ]))
 
-for joint in range(p.getNumJoints(pendulum)):
-    p.setJointMotorControl2(pendulum, joint, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
-    p.getJointInfo(pendulum, joint)
+for joint in range(p.getNumJoints(base_1)):
+    p.setJointMotorControl2(base_1, joint, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
+    p.getJointInfo(base_1, joint)
 
 #p.changeDynamics(pendulum, linkIndex=1 , mass=100, restitution=.1)
 
 
 for i in range (20000):
     p.stepSimulation()
+    cid = p.createConstraint(base_1, -1, 2323, -1, p.JOINT_FIXED, [0, 0, 0], [0, 0, 1], [0, 0, 1])
+    #cid = p.createConstraint(base_2, -1, 2323, -1, p.JOINT_FIXED, [0, 0, 0], [0, 0, 1], [0, 0, 1])
+
+    #cid2 = p.createConstraint(base_1, -1, base_1, 0, p.JOINT_FIXED, [0, 0, 1], [0, 0, 1], [0, 0, 1])
+
+    
+
     """
     #info=p.getJointInfo(pendulum, 4)
     pendulum_angle=p.getJointState(pendulum,4)
