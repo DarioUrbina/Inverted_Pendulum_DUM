@@ -19,7 +19,7 @@
       <geometry>
         <box size="0.3 0.3 3"/>
       </geometry>
-      <material name="white"/>
+      <material name="blue"/>
     </visual>
     <collision>
       <geometry>
