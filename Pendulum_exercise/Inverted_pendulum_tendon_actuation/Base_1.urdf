@@ -55,7 +55,7 @@
     <parent link="Base"/>
     <child link="pulley1"/>
     <limit effort="0" lower="1" upper="0" velocity="50"/>
-    <origin rpy="1.57075 0 0" xyz=".1 .21 .45"/>
+    <origin rpy="-1.57075 0 0" xyz=".1 .35 .45"/>
   </joint>
 
   <link name="tendon1_1">
