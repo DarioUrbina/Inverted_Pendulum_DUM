@@ -77,7 +77,7 @@ if(1):
 
 cid = p.createConstraint(base_1, -1, base_1, -1, p.JOINT_FIXED, [0, 0, 0], [0, 0, 0], [0, 0, 0])
 cid2 = p.createConstraint(base_1, tendon1_4_tendon1_5, cart, -1, p.JOINT_FIXED, [0, 0, 0], [.4, .05, 0], [-.1, .05, 0])
-cid3 = p.createConstraint(base_2, tendon1_4_tendon1_5_2, cart, -1, p.JOINT_FIXED, [0, 0, 0], [.4, .05, 0], [.1, .05, 0])
+cid3 = p.createConstraint(base_2, tendon1_4_tendon1_5_2, cart, -1, p.JOINT_FIXED, [0, 0, 0], [-.4, .05, 0], [.1, .05, 0])
 
 
 """
