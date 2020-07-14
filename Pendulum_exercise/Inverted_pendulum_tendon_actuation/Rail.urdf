@@ -32,7 +32,34 @@
       <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
     </inertial>
   </link>
+ <!--
+  <link name="cart">
+    <visual>
+      <geometry>
+        <box size="0.6 0.3 0.1"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.6 0.3 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
 
+  <joint name="rail_cart" type="prismatic">
+    <axis xyz="1 0 0"/>
+    <parent link="Rail"/>
+    <child link="cart"/>
+    <limit effort="0" lower="-2" upper="2" velocity="25"/>
+    <origin rpy="0 1.570796 0" xyz="0 0 0"/>
+  </joint>
+  -->
   <!--
   <link name="pulley1">
     <visual>

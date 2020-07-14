@@ -10,30 +10,30 @@ plane = p.loadURDF("plane.urdf")
 cubeStartPos = [-2.15,0,.5]
 cubeStartPos2 = [0,0,.9]
 cubeStartPos3 = [2.15,0,.5]
-PulleyStartPos = [-2.15,.21,.65]
-
 
 PulleyStartOrientation = p.getQuaternionFromEuler([1.570796, 0, 0])  
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
 cubeStartOrientation2 = p.getQuaternionFromEuler([0,1.570796,0])
+#cubeStartOrientation2
 
 base_1 = p.loadURDF("Base_1.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
 rail = p.loadURDF("Rail.urdf",cubeStartPos2, cubeStartOrientation2, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
 base_2 = p.loadURDF("Base_1.urdf",cubeStartPos3, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
 cart = p.loadURDF("Cart.urdf",flags=p.URDF_USE_SELF_COLLISION)
+#cart_slider = p.loadURDF("Cart.urdf",cubeStartPos2)
+
 
 nJoints = p.getNumJoints(base_1)
 jointNameToId = {}
 for i in range(nJoints):
   jointInfo = p.getJointInfo(base_1, i)
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
-  #print(jointInfo)
+
 
 tendon1_4_tendon1_5 = jointNameToId['tendon1_4_tendon1_5']
 
 
 nJoints2 = p.getNumJoints(base_2)
-
 jointNameToId = {}
 
 for i in range(nJoints2):
@@ -78,6 +78,7 @@ if(1):
 cid = p.createConstraint(base_1, -1, base_1, -1, p.JOINT_FIXED, [0, 0, 0], [0, 0, 0], [0, 0, 0])
 cid2 = p.createConstraint(base_1, tendon1_4_tendon1_5, cart, -1, p.JOINT_FIXED, [0, 0, 0], [.4, .05, 0], [-.1, .05, 0])
 cid3 = p.createConstraint(base_2, tendon1_4_tendon1_5_2, cart, -1, p.JOINT_FIXED, [0, 0, 0], [-.4, .05, 0], [.1, .05, 0])
+#cid4 = p.createConstraint(rail, -1, cart_slider, -1, p.JOINT_PRISMATIC, [0, 0, 0], [0, 0, 0], [0, 0, 0])
 
 
 """
