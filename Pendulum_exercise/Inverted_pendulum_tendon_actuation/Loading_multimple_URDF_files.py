@@ -7,13 +7,13 @@ import pybullet_data
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf")
 
-cubeStartPos = [-2.15,0,.5]
-cubeStartPos2 = [0,0,.9]
-cubeStartPos3 = [2.15,0,.5]
+cubeStartPos = [-2.15,0,.75]
+cubeStartPos2 = [0,0,1.4]
+cubeStartPos3 = [2.15,0,.75]
 
 PulleyStartOrientation = p.getQuaternionFromEuler([1.570796, 0, 0])  
 cubeStartOrientation = p.getQuaternionFromEuler([0,0,0])
-cubeStartOrientation2 = p.getQuaternionFromEuler([0,1.570796,0])
+cubeStartOrientation2 = p.getQuaternionFromEuler([0,-1.570796,0])
 #cubeStartOrientation2
 
 base_1 = p.loadURDF("Base_1.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
@@ -95,7 +95,7 @@ cid = p.createConstraint(quadruped, knee_front_rightR_link, quadruped, knee_fron
 
 """p.changeConstraint(cid, [1,1,0], [1,0,0], maxForce=50)"""
 #p.changeConstraint(cid, pivot, jointChildFrameOrientation=orn, maxForce=50)
-p.setGravity(0,0,-10)
+p.setGravity(0,0,0)
 
 
 

@@ -17,13 +17,13 @@
   <link name="Base">
     <visual>
       <geometry>
-        <box size="0.3 0.3 1"/>
+        <box size="0.3 0.3 1.5"/>
       </geometry>
       <material name="white"/>
     </visual>
     <collision>
       <geometry>
-        <box size="0.3 0.3 1"/>
+        <box size="0.3 0.3 1.5"/>
       </geometry>
     </collision>
     <inertial>
@@ -55,7 +55,7 @@
     <parent link="Base"/>
     <child link="pulley1"/>
     <limit effort="0" lower="1" upper="0" velocity="50"/>
-    <origin rpy="-1.57075 0 0" xyz=".1 .35 .45"/>
+    <origin rpy="-1.57075 0 0" xyz="0 .35 .15"/>
   </joint>
 <!--
   <link name="tendon1_1">
