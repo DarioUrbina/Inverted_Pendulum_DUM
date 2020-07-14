@@ -95,7 +95,7 @@ cid = p.createConstraint(quadruped, knee_front_rightR_link, quadruped, knee_fron
 
 """p.changeConstraint(cid, [1,1,0], [1,0,0], maxForce=50)"""
 #p.changeConstraint(cid, pivot, jointChildFrameOrientation=orn, maxForce=50)
-p.setGravity(0,0,0)
+p.setGravity(0,0,-10)
 
 
 
