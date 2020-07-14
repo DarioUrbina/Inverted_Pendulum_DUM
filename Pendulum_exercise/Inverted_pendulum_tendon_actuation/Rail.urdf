@@ -450,7 +450,7 @@
       <geometry>
         <cylinder length=".1" radius=".05"/>
       </geometry>
-      <material name="other"/>
+      <material name="white"/>
     </visual>
     <collision>
       <geometry>
