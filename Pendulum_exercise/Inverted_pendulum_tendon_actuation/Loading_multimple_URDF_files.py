@@ -25,20 +25,9 @@ base_2 = p.loadURDF("Base_1.urdf",cubeStartPos3, cubeStartOrientation, useFixedB
 nJoints = p.getNumJoints(base_2)
 jointNameToId = {}
 for i in range(nJoints):
-  jointInfo = p.getJointInfo(base_1, i)
+  jointInfo = p.getJointInfo(base_2, i)
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
 Base_pulley1_2 = jointNameToId['Base_pulley1']
-
-
-"""
-nJoints2 = p.getNumJoints(base_2)
-jointNameToId = {}
-for i in range(nJoints2):
-  jointInfo2 = p.getJointInfo(base_2, i)
-  jointNameToId[jointInfo2[1].decode('UTF-8')] = jointInfo2[0]  
-tendon1_4_tendon1_5_2 = jointNameToId['tendon1_4_tendon1_5']
-"""
-
 
 nJoints3 = p.getNumJoints(rail)
 jointNameToId = {}
@@ -46,6 +35,27 @@ for i in range(nJoints3):
   jointInfo3 = p.getJointInfo(rail, i)
   jointNameToId[jointInfo3[1].decode('UTF-8')] = jointInfo3[0]
 last_tendon_link_1 = jointNameToId['tendon1_13_tendon1_14']
+
+last_tendon_link_2 = jointNameToId['tendon2_13_tendon2_14']
+
+
+
+nJoints2 = p.getNumJoints(base_1)
+jointNameToId = {}
+for i in range(nJoints2):
+  jointInfo2 = p.getJointInfo(base_1, i)
+  jointNameToId[jointInfo2[1].decode('UTF-8')] = jointInfo2[0]  
+Base_pulley1_1 = jointNameToId['Base_pulley1']
+
+"""nJoints4 = p.getNumJoints(rail)
+jointNameToId = {}
+for i in range(nJoints4):
+  jointInfo4 = p.getJointInfo(rail, i)
+  jointNameToId[jointInfo3[1].decode('UTF-8')] = jointInfo4[0]
+last_tendon_link_2 = jointNameToId['tendon2_13_tendon2_14']
+"""
+
+
 
 
 
@@ -79,10 +89,11 @@ if(1):
 
 #cid = p.createConstraint(base_1, -1, base_1, -1, p.JOINT_FIXED, [0, 0, 0], [0, 0, 0], [0, 0, 0])
 
-cid2 = p.createConstraint(base_2, Base_pulley1_2, rail, last_tendon_link_1, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [-.5, 0, 0])
-"""
-cid4 = p.createConstraint(rail, r_c, cart, -1, p.JOINT_FIXED, [0, 0, 0], [0, .15, 0], [0, -.05, 0])
+#WORKING WELL:
+cid2 = p.createConstraint(base_2, Base_pulley1_2, rail, last_tendon_link_1, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [-.56, 0, 0])
 
+cid4 = p.createConstraint(base_1, Base_pulley1_1, rail, last_tendon_link_2, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [-.56, 0, 0])
+"""
 cid3 = p.createConstraint(base_2, tendon1_4_tendon1_5_2, cart, -1, p.JOINT_FIXED, [0, 0, 0], [.45, .05, 0], [.1, .05, 0])
 """
 
