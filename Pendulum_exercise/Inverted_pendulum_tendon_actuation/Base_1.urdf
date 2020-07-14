@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<robot name="myfirst">
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name="other">
+    <color rgba="1 0 0.8 1"/>
+  </material>
+  <velocity name="vel">
+    <speed spd="50"/>
+  </velocity>
+  
+
+  <link name="Base">
+    <visual>
+      <geometry>
+        <box size="0.3 0.3 1"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.3 0.3 1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+ <link name="pulley1">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".5"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".1" radius=".5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="Base_pulley1" type="revolute"> <!--Make revolute joint later-->
+    <axis xyz="0 0 1"/>
+    <parent link="Base"/>
+    <child link="pulley1"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
+    <origin rpy="1.57075 0 0" xyz=".1 .21 .45"/>
+  </joint>
+
+  <link name="tendon1_1">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="pulley1_tendon1_1" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="pulley1"/>
+    <child link="tendon1_1"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
+    <origin rpy="0 0 0" xyz="0 .55 0"/>
+  </joint>
+
+  <link name="tendon1_2">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="tendon1_1_tendon1_2" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="tendon1_1"/>
+    <child link="tendon1_2"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
+    <origin rpy="0 0 0" xyz=".4 0 0"/>
+  </joint>
+
+  <link name="tendon1_3">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="tendon1_2_tendon1_3" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="tendon1_2"/>
+    <child link="tendon1_3"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
+    <origin rpy="0 0 0" xyz=".4 0 0"/>
+  </joint>
+
+  <link name="tendon1_4">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="tendon1_3_tendon1_4" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="tendon1_3"/>
+    <child link="tendon1_4"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
+    <origin rpy="0 0 0" xyz=".4 0 0"/>
+  </joint>
+
+  <link name="tendon1_5">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".1" radius=".05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="tendon1_4_tendon1_5" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="tendon1_4"/>
+    <child link="tendon1_5"/>
+    <limit effort="0" lower="1" upper="0" velocity="50"/>
+    <origin rpy="0 0 0" xyz=".4 0 0"/>
+  </joint>
+</robot>

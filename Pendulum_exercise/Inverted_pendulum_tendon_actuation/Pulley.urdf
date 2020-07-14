@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="myfirst">
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name="other">
+    <color rgba="1 0 0.8 1"/>
+  </material>
+  <velocity name="vel">
+    <speed spd="50"/>
+  </velocity>
+    
+  <!--Moving mechanism-->
+  
+  <link name="pulley1">
+    <visual>
+      <geometry>
+        <cylinder length=".1" radius=".5"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length=".1" radius=".5"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+</robot>  
