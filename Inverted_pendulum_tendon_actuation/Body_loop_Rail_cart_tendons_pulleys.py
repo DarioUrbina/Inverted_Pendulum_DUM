@@ -17,7 +17,7 @@ cubeStartOrientation2 = p.getQuaternionFromEuler([0,-1.570796,0])
 #cubeStartOrientation2
 
 base_1 = p.loadURDF("Base_1.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
-rail = p.loadURDF("Rail.urdf",cubeStartPos2, cubeStartOrientation2, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
+rail = p.loadURDF("Tendons_Cart_Rail.urdf",cubeStartPos2, cubeStartOrientation2, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
 base_2 = p.loadURDF("Base_1.urdf",cubeStartPos3, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
 """cart = p.loadURDF("Cart.urdf",flags=p.URDF_USE_SELF_COLLISION)"""
 
