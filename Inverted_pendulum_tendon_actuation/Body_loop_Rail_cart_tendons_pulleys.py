@@ -33,21 +33,21 @@ for i in range(nJoints):
   jointInfo = p.getJointInfo(rail, i)
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
 last_tendon_link_1 = jointNameToId['tendon1_13_tendon1_14']
-#last_tendon_link_2 = jointNameToId['tendon2_13_tendon2_14']
-"""
+cart = jointNameToId['slider_cart']
+
 nJoints = p.getNumJoints(base_1)
 jointNameToId = {}
 for i in range(nJoints):
   jointInfo = p.getJointInfo(base_1, i)
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]  
-Base_pulley1_1 = jointNameToId['Base_pulley1']
-"""
+last_tendon_link_2 = jointNameToId['tendon1_13_tendon1_14']
+
 #print("LAST TENDON LINK:")
 #print(tendon1_4_tendon1_5)
 
 cid2 = p.createConstraint(base_2, Base_pulley1_2, rail, last_tendon_link_1, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [-.56, 0, 0])
 
-#cid4 = p.createConstraint(base_1, Base_pulley1_1, rail, last_tendon_link_2, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [-.56, 0, 0])
+cid4 = p.createConstraint(base_1, last_tendon_link_2, rail, cart, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [0,-.55, 0])
 
 
 """ #********REFERENCE: ***********
