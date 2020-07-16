@@ -84,8 +84,61 @@
     <child link="cart"/>
     <origin rpy="0 0 0" xyz="0 0 0.3"/>
   </joint>
+<!--*****************************************-->
   
-      <!---->
+  <link name="pendulumAxis">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 .1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 .1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="cart_pendulumAxis" type="revolute">
+    <axis xyz="0 0 1"/>
+    <parent link="cart"/>
+    <child link="pendulumAxis"/>
+    <limit effort="0" lower="1" upper="0" velocity="205"/>
+    <origin rpy="0 0 0" xyz="0 0 .21"/>
+  </joint>
+  
+  <link name="pendulum">
+    <visual>
+      <geometry>
+        <box size="0.1 0.8 .1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.8 .1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+
+  <joint name="pendulumAxis_pendulum" type="fixed">
+    <parent link="pendulumAxis"/>
+    <child link="pendulum"/>
+    <origin rpy="0 0 1.570796" xyz="-0.45 0 0"/>
+  </joint>
+  
+      <!--*****************************************-->
   <link name="tendon1_1">
     <visual>
       <geometry>

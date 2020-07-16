@@ -19,7 +19,13 @@ cubeStartOrientation2 = p.getQuaternionFromEuler([0,-1.570796,0])
 
 base_2 = p.loadURDF("Base_2.urdf",cubeStartPos, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
 rail = p.loadURDF("Tendon_1_Cart_Rail.urdf",cubeStartPos2, cubeStartOrientation2, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION) 
-base_1 = p.loadURDF("Base_1.urdf",cubeStartPos3, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)           
+base_1 = p.loadURDF("Base_1.urdf",cubeStartPos3, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
+
+#for joint in range(p.getNumJoints(pendulum)):
+#    p.setJointMotorControl2(pendulum, joint, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
+#    p.getJointInfo(pendulum, joint)
+
+
 
 """_____________________________________________________________________________________________________________________________"""
 """Getting access and information from specific joints in each body (each body has links and joint described in the URDF files):"""
@@ -28,6 +34,7 @@ jointNameToId = {}
 for i in range(nJoints):
   jointInfo = p.getJointInfo(base_1, i)
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
+  #p.setJointMotorControl2(base_1, i, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
 Base_pulley1_1 = jointNameToId['Base_pulley1']
 
 nJoints = p.getNumJoints(rail)
@@ -36,13 +43,16 @@ for i in range(nJoints):
   jointInfo = p.getJointInfo(rail, i)
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
 last_tendon_link_1 = jointNameToId['tendon1_13_tendon1_14']
+cart_pendulumAxis = jointNameToId['cart_pendulumAxis']
+p.setJointMotorControl2(rail, cart_pendulumAxis, p.VELOCITY_CONTROL, targetVelocity=0, force=0)
 cart = jointNameToId['slider_cart']
 
 nJoints = p.getNumJoints(base_2)
 jointNameToId = {}
 for i in range(nJoints):
   jointInfo = p.getJointInfo(base_2, i)
-  jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]  
+  jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
+  #p.setJointMotorControl2(base_2, i, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
 last_tendon_link_2 = jointNameToId['tendon1_13_tendon1_14']
 """_____________________________________________________________________________________________________________________________"""
 """Creating new contraints (joints), with the information obtained in the previous step"""
