@@ -21,11 +21,6 @@ base_2 = p.loadURDF("Base_2.urdf",cubeStartPos, cubeStartOrientation, useFixedBa
 rail = p.loadURDF("Tendon_1_Cart_Rail.urdf",cubeStartPos2, cubeStartOrientation2, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION) 
 base_1 = p.loadURDF("Base_1.urdf",cubeStartPos3, cubeStartOrientation, useFixedBase=1, flags=p.URDF_USE_SELF_COLLISION)
 
-#for joint in range(p.getNumJoints(pendulum)):
-#    p.setJointMotorControl2(pendulum, joint, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
-#    p.getJointInfo(pendulum, joint)
-
-
 
 """_____________________________________________________________________________________________________________________________"""
 """Getting access and information from specific joints in each body (each body has links and joint described in the URDF files):"""
@@ -34,8 +29,7 @@ jointNameToId = {}
 for i in range(nJoints):
   jointInfo = p.getJointInfo(base_1, i)
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
-  #p.setJointMotorControl2(base_1, i, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
-Base_pulley1_1 = jointNameToId['Base_pulley1']
+Base_pulley_1 = jointNameToId['Base_pulley1']
 
 nJoints = p.getNumJoints(rail)
 jointNameToId = {}
@@ -44,7 +38,6 @@ for i in range(nJoints):
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
 last_tendon_link_1 = jointNameToId['tendon1_13_tendon1_14']
 cart_pendulumAxis = jointNameToId['cart_pendulumAxis']
-p.setJointMotorControl2(rail, cart_pendulumAxis, p.VELOCITY_CONTROL, targetVelocity=0, force=0)
 cart = jointNameToId['slider_cart']
 
 nJoints = p.getNumJoints(base_2)
@@ -52,13 +45,20 @@ jointNameToId = {}
 for i in range(nJoints):
   jointInfo = p.getJointInfo(base_2, i)
   jointNameToId[jointInfo[1].decode('UTF-8')] = jointInfo[0]
-  #p.setJointMotorControl2(base_2, i, p.VELOCITY_CONTROL, targetVelocity=10, force=0)
 last_tendon_link_2 = jointNameToId['tendon1_13_tendon1_14']
+Base_pulley_2 = jointNameToId['Base_pulley1']
 """_____________________________________________________________________________________________________________________________"""
 """Creating new contraints (joints), with the information obtained in the previous step"""
 
-pulley_1_tendon_magenta = p.createConstraint(base_1, Base_pulley1_1, rail, last_tendon_link_1, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [-.56, 0, 0])
+pulley_1_tendon_magenta = p.createConstraint(base_1, Base_pulley_1, rail, last_tendon_link_1, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [-.56, 0, 0])
 tendon_white_cart = p.createConstraint(base_2, last_tendon_link_2, rail, cart, p.JOINT_FIXED, [0, 0, 1], [0, 0, 0], [0,-.55, 0])
+
+"""_____________________________________________________________________________________________________________________________"""
+"""Defining some motor states"""
+p.setJointMotorControl2(rail, cart_pendulumAxis, p.VELOCITY_CONTROL, targetVelocity=0, force=0)
+
+"""_____________________________________________________________________________________________________________________________"""
+
 
 """p.changeConstraint(cid, [1,1,0], [1,0,0], maxForce=50)"""
 #p.changeConstraint(cid, pivot, jointChildFrameOrientation=orn, maxForce=50)
@@ -75,8 +75,12 @@ p.setGravity(0,0,-10)
 for i in range (20000):
     p.stepSimulation()
     #p.changeConstraint(cid, [0,0,0], [1,0,0], maxForce=50)
+    p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=10, force=1000)
+    p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=10, force=-1000)
+    
 
     time.sleep(1./240.)
+
     
 p.disconnect()
 
