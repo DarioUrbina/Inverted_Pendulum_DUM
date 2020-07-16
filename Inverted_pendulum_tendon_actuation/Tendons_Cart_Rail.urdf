@@ -135,7 +135,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_3">
     <visual>
       <geometry>
@@ -160,7 +159,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-  
   <link name="tendon1_4">
     <visual>
       <geometry>
@@ -185,7 +183,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_5">
     <visual>
       <geometry>
@@ -210,7 +207,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_6">
     <visual>
       <geometry>
@@ -235,7 +231,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-  
   <link name="tendon1_7">
     <visual>
       <geometry>
@@ -260,7 +255,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_8">
     <visual>
       <geometry>
@@ -285,7 +279,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_9">
     <visual>
       <geometry>
@@ -310,7 +303,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_10">
     <visual>
       <geometry>
@@ -335,7 +327,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_11">
     <visual>
       <geometry>
@@ -360,7 +351,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_12">
     <visual>
       <geometry>
@@ -385,7 +375,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_13">
     <visual>
       <geometry>
@@ -410,7 +399,6 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 .2 0"/>
   </joint>
-
   <link name="tendon1_14">
     <visual>
       <geometry>
@@ -438,14 +426,8 @@
   <!--+++++++++++++++++++++++++++++++++++++++++-->
   <!--+++++++++++++++++++++++++++++++++++++++++-->
   <!--+++++++++++++++++++++++++++++++++++++++++-->
-  <!--+++++++++++++++++++++++++++++++++++++++++-->
-  <!--+++++++++++++++++++++++++++++++++++++++++-->
-  <!--+++++++++++++++++++++++++++++++++++++++++-->
-  <!--+++++++++++++++++++++++++++++++++++++++++-->
-
-
-
-  <link name="tendon2_1">
+  <!--
+ <link name="tendon2_1">
     <visual>
       <geometry>
         <cylinder length=".1" radius=".05"/>
@@ -794,5 +776,5 @@
     <limit effort="0" lower="1" upper="0" velocity="50"/>
     <origin rpy="0 0 0" xyz="0 -.2 0"/>
   </joint>
-  <!-- -->
+   -->
 </robot>
