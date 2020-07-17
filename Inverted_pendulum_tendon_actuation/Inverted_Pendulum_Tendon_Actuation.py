@@ -11,7 +11,7 @@ plane = p.loadURDF("plane.urdf")
 """Gains and motor forces"""
 motorForce=700
 proportional_gain = -1500
-integral_gain = -1000
+integral_gain = -500
 derivative_gain = 3000
 
 previous_pendulum_angle = 0
@@ -101,7 +101,7 @@ for i in range (20000):
 
     u = p_correction + i_correction + d_correction + 10
     print(u)
-    u = u*.5
+    u = u
     if u<4000:
       u=4000
     elif u>9000:
