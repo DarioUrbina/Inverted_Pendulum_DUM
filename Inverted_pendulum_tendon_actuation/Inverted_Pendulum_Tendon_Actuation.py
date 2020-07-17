@@ -10,10 +10,10 @@ plane = p.loadURDF("plane.urdf")
 """_____________________________________________________________________________________________________________________________"""
 """Gains and motor forces"""
 motorForce=700
-proportional_gain = -3000
-integral_gain = 1500
-derivative_gain = 3000
-u_lower_limit=2000
+proportional_gain = 30000
+integral_gain = 18000
+derivative_gain = 22000
+u_lower_limit=700
 u_upper_limit=9000
 
 
@@ -88,7 +88,7 @@ for i in range (20000):
     p.stepSimulation()
     pendulum_angle = p.getJointState(pendulum,cart_pendulumAxis)
     pendulum_angle = pendulum_angle[0]
-    print(pendulum_angle)
+    #print(pendulum_angle)
 
     angle_delta_error = -pendulum_angle
 
@@ -104,7 +104,7 @@ for i in range (20000):
 
     u = p_correction + i_correction + d_correction + 10
     print(u)
-    u = u
+    u = abs(u)
     if u<u_lower_limit:
       u=u_lower_limit
     elif u>u_upper_limit:
@@ -115,11 +115,11 @@ for i in range (20000):
     if pendulum_angle > 0:
       p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force=u*1.5)   #Base 1: magenta base and tendon
       p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force=-1000)#Base 2: white base and tendon
-      print(">0")
+      #print(">0")
     else:
       p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force=1000)  #Base 1: magenta base and tendon
       p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force=-u*1.5)#Base 2: white base and tendon
-      print("<0")
+      #print("<0")
     
 
     time.sleep(1./240.)
