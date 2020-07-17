@@ -101,9 +101,10 @@ for i in range (20000):
 
     u = p_correction + i_correction + d_correction + 10
     print(u)
-    u = u*.8
-    if u<5000:
-      u=5000
+    u = u*.2
+    if u<4000:
+      u=4000
+    print(u)
     
     #p.changeConstraint(cid, [0,0,0], [1,0,0], maxForce=50)
     if pendulum_angle > 0:
