@@ -3,6 +3,8 @@ import time
 import math as m
 import numpy as np
 import pybullet_data
+from matplotlib import pyplot as plt 
+
 
 p.connect(p.GUI)
 plane = p.loadURDF("plane.urdf")
@@ -13,8 +15,14 @@ motorForce=700
 proportional_gain = 30000
 integral_gain = 18000
 derivative_gain = 22000
+
+u_factor = 1.5
+
 u_lower_limit=700
 u_upper_limit=9000
+u_history = np.array( [[1000,-1000]] ) 
+
+time_steps = 100
 
 
 previous_pendulum_angle = 0
@@ -84,7 +92,7 @@ p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocit
 p.setGravity(0,0,-10)
 
 
-for i in range (20000):
+for i in range (time_steps):
     p.stepSimulation()
     pendulum_angle = p.getJointState(pendulum,cart_pendulumAxis)
     pendulum_angle = pendulum_angle[0]
@@ -103,26 +111,50 @@ for i in range (20000):
     d_correction = derivative_gain * angle_delta_error
 
     u = p_correction + i_correction + d_correction + 10
-    print(u)
+    
     u = abs(u)
     if u<u_lower_limit:
       u=u_lower_limit
     elif u>u_upper_limit:
       u=u_upper_limit   
-    print(u)
+    #print(u)
     
-    #p.changeConstraint(cid, [0,0,0], [1,0,0], maxForce=50)
     if pendulum_angle > 0:
-      p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force=u*1.5)   #Base 1: magenta base and tendon
-      p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force=-1000)#Base 2: white base and tendon
+      u_pulley_1 = u * u_factor   #Base 1: magenta base and tendon
+      u_pulley_2 = -1000          #Base 2: white base and tendon
       #print(">0")
     else:
-      p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force=1000)  #Base 1: magenta base and tendon
-      p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force=-u*1.5)#Base 2: white base and tendon
+      u_pulley_1 = 1000           #Base 1: magenta base and tendon
+      u_pulley_2 = -u * u_factor  #Base 2: white base and tendon
       #print("<0")
-    
 
+    p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_1)  #Base 1: magenta base and tendon
+    p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_2)  #Base 2: white base and tendon
+
+
+    u_history = np.append( u_history , [[ u_pulley_1, u_pulley_2]] , axis = 0)    
+
+        
     time.sleep(1./240.)
+
+print("Done with simulation")
+print (u_history)
+
+a = np.arange(time_steps)
+#for i in range (time_steps):
+  
+"""
+plt.plot(a[:],u_history[:,1],label="u_pulley_1")
+plt.plot(a[:],u_history[:,2],label="u_pulley_2")
+
+plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
+           ncol=1, mode=None, borderaxespad=0.)
+
+plt.show()
+
+for i in range (10000):
+      time.sleep(1./240.)
+""" 
 
     
 p.disconnect()
