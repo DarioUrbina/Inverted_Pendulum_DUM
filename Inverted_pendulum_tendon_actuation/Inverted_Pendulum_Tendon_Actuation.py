@@ -101,9 +101,11 @@ for i in range (20000):
 
     u = p_correction + i_correction + d_correction + 10
     print(u)
-    u = u*.2
+    u = u*.5
     if u<4000:
       u=4000
+    elif u>9000:
+      u=9000
     print(u)
     
     #p.changeConstraint(cid, [0,0,0], [1,0,0], maxForce=50)
