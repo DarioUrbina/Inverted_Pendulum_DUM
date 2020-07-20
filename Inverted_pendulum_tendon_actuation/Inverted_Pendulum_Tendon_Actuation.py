@@ -22,7 +22,7 @@ u_lower_limit=700
 u_upper_limit=9000
 history = np.array( [[1000,-1000,0]] )
 time_history = np.array([[0]])
-time_steps = 1000
+time_steps = 10
 
 
 previous_pendulum_angle = 0
@@ -149,8 +149,15 @@ ax1.set_ylabel("Activation Values")
 ax1.plot(history[:,0],label="u_pulley_1")
 ax1.plot(history[:,1],label="u_pulley_2")
 ax1.set_ylim((-20000,20000))
+
+x1, y1 = [5, 5], [-30000, 30000]
+plt.plot(x1, y1, marker = 'o')
+
+
 plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
            ncol=1, mode=None, borderaxespad=0.)
+plt.title("Ctrl Input and Angle History") 
+plt.grid(True)
 
 color = 'tab:red'
 ax2 = ax1.twinx()
@@ -158,6 +165,7 @@ ax2.set_ylabel('Pendulum Angle', color=color)
 ax2.plot(np.rad2deg(history[:,2]),label="Angle",color=color)
 ax2.tick_params(axis='y', labelcolor=color)
 ax2.set_ylim((-90,90))
+
 
 
 fig.tight_layout()
