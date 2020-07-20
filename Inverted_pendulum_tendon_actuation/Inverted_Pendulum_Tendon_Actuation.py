@@ -148,6 +148,7 @@ ax1.set_xlabel("Time Steps")
 ax1.set_ylabel("Activation Values")
 ax1.plot(history[:,0],label="u_pulley_1")
 ax1.plot(history[:,1],label="u_pulley_2")
+ax1.set_ylim((-20000,20000))
 plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
            ncol=1, mode=None, borderaxespad=0.)
 
@@ -156,6 +157,8 @@ ax2 = ax1.twinx()
 ax2.set_ylabel('Pendulum Angle', color=color)
 ax2.plot(np.rad2deg(history[:,2]),label="Angle",color=color)
 ax2.tick_params(axis='y', labelcolor=color)
+ax2.set_ylim((-90,90))
+
 
 fig.tight_layout()
 
@@ -163,32 +166,6 @@ fig.tight_layout()
 #           ncol=1, mode=None, borderaxespad=0.)
 
 plt.show()
-
-
-"""
-plt.plot(u_history[:,0],label="u_pulley_1")
-plt.plot(u_history[:,1],label="u_pulley_2")
-
-plt.grid(True)
-
-plt.title("Motor Activation Values") 
-
-
-plt.xlabel("Time Steps") 
-#plt.ylabel("y axis caption") 
-
-plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
-           ncol=1, mode=None, borderaxespad=0.)
-
-plt.show()
-
-"""
-"""
-for i in range (time_steps):
-  u_history = np.append( u_history , [[ u_pulley_1, u_pulley_2]] , axis = 0)
-plt.plot(u[:],u_history[:,1],label="u_pulley_1")
-plt.show()
-"""
 
     
 p.disconnect()
