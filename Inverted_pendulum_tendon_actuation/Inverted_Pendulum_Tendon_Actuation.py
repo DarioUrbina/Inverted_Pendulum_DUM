@@ -20,9 +20,9 @@ u_factor = 1.5
 
 u_lower_limit=700
 u_upper_limit=9000
-u_history = np.array( [[1000,-1000]] ) 
-
-time_steps = 100
+u_history = np.array( [[1000,-1000]] )
+time_history = np.array([[0]])
+time_steps = 1000
 
 
 previous_pendulum_angle = 0
@@ -140,9 +140,29 @@ for i in range (time_steps):
 print("Done with simulation")
 print (u_history)
 
+"""
 a = np.arange(time_steps)
-#for i in range (time_steps):
-  
+
+for i in range (time_steps):
+  u_history = np.append( u_history , [[ u_pulley_1, u_pulley_2]] , axis = 0)
+"""
+
+plt.plot(u_history[:,0],label="u_pulley_1")
+plt.plot(u_history[:,1],label="u_pulley_2")
+
+plt.grid(True)
+
+plt.title("Motor Activation Values") 
+
+
+plt.xlabel("Time Steps") 
+#plt.ylabel("y axis caption") 
+
+plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
+           ncol=1, mode=None, borderaxespad=0.)
+
+plt.show()
+
 """
 plt.plot(a[:],u_history[:,1],label="u_pulley_1")
 plt.plot(a[:],u_history[:,2],label="u_pulley_2")
