@@ -3,7 +3,7 @@ import time
 import math as m
 import numpy as np
 import pybullet_data
-from matplotlib import pyplot as plt 
+import matplotlib.pyplot as plt
 
 
 p.connect(p.GUI)
@@ -20,7 +20,7 @@ u_factor = 1.5
 
 u_lower_limit=700
 u_upper_limit=9000
-u_history = np.array( [[1000,-1000]] )
+history = np.array( [[1000,-1000,0]] )
 time_history = np.array([[0]])
 time_steps = 1000
 
@@ -132,7 +132,7 @@ for i in range (time_steps):
     p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_2)  #Base 2: white base and tendon
 
 
-    u_history = np.append( u_history , [[ u_pulley_1, u_pulley_2]] , axis = 0)    
+    history = np.append(history , [[ u_pulley_1, u_pulley_2, pendulum_angle]] , axis = 0)    
 
         
     time.sleep(1./240.)
@@ -140,7 +140,32 @@ for i in range (time_steps):
 print("Done with simulation")
 #print (u_history)
 
+fig, ax1 = plt.subplots()
 
+
+
+ax1.set_xlabel("Time Steps")
+ax1.set_ylabel("Activation Values")
+ax1.plot(history[:,0],label="u_pulley_1")
+ax1.plot(history[:,1],label="u_pulley_2")
+plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
+           ncol=1, mode=None, borderaxespad=0.)
+
+color = 'tab:red'
+ax2 = ax1.twinx()
+ax2.set_ylabel('Pendulum Angle', color=color)
+ax2.plot(np.rad2deg(history[:,2]),label="Angle",color=color)
+ax2.tick_params(axis='y', labelcolor=color)
+
+fig.tight_layout()
+
+#plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
+#           ncol=1, mode=None, borderaxespad=0.)
+
+plt.show()
+
+
+"""
 plt.plot(u_history[:,0],label="u_pulley_1")
 plt.plot(u_history[:,1],label="u_pulley_2")
 
@@ -157,7 +182,7 @@ plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
 
 plt.show()
 
-
+"""
 """
 for i in range (time_steps):
   u_history = np.append( u_history , [[ u_pulley_1, u_pulley_2]] , axis = 0)
