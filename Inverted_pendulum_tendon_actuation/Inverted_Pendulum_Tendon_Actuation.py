@@ -138,14 +138,8 @@ for i in range (time_steps):
     time.sleep(1./240.)
 
 print("Done with simulation")
-print (u_history)
+#print (u_history)
 
-"""
-a = np.arange(time_steps)
-
-for i in range (time_steps):
-  u_history = np.append( u_history , [[ u_pulley_1, u_pulley_2]] , axis = 0)
-"""
 
 plt.plot(u_history[:,0],label="u_pulley_1")
 plt.plot(u_history[:,1],label="u_pulley_2")
@@ -163,18 +157,13 @@ plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
 
 plt.show()
 
+
 """
-plt.plot(a[:],u_history[:,1],label="u_pulley_1")
-plt.plot(a[:],u_history[:,2],label="u_pulley_2")
-
-plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
-           ncol=1, mode=None, borderaxespad=0.)
-
+for i in range (time_steps):
+  u_history = np.append( u_history , [[ u_pulley_1, u_pulley_2]] , axis = 0)
+plt.plot(u[:],u_history[:,1],label="u_pulley_1")
 plt.show()
-
-for i in range (10000):
-      time.sleep(1./240.)
-""" 
+"""
 
     
 p.disconnect()
