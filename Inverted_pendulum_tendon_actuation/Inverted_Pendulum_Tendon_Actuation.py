@@ -22,7 +22,7 @@ u_lower_limit=700
 u_upper_limit=9000
 history = np.array( [[1000,-1000,0]] )
 time_history = np.array([[0]])
-time_steps = 5000
+time_steps = 3000
 
 
 previous_pendulum_angle = 0
@@ -148,10 +148,10 @@ ax1.set_xlabel("Time Steps")
 ax1.set_ylabel("Activation Values")
 ax1.plot(history[:,0],label="u_pulley_1")
 ax1.plot(history[:,1],label="u_pulley_2")
-ax1.set_ylim((-20000,20000))
+ax1.set_ylim((-12000,12000))
 
 x1, y1 = [5, 5], [-30000, 30000]
-plt.plot(x1, y1, marker = 'o')
+#plt.plot(x1, y1, marker = 'o')
 
 
 plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
