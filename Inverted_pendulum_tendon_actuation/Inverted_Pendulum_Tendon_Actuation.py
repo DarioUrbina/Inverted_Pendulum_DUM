@@ -5,30 +5,41 @@ import numpy as np
 import pybullet_data
 import matplotlib.pyplot as plt
 
-
 p.connect(p.GUI)
-plane = p.loadURDF("plane.urdf")
 
 """_____________________________________________________________________________________________________________________________"""
-"""Gains and motor forces"""
-motorForce=700
+"""Gains, motor forces, daq and timing parameters"""
+
+""" Gains for pendulum angle"""
 proportional_gain = 30000
 integral_gain = 18000
 derivative_gain = 22000
 
-u_factor = 1.5
+"""Gains to keep cart centered: """
+proportional_gain_2 = 8000
+integral_gain_2 = 0
+derivative_gain_2 = 0
 
+"""Control input parameters"""
+u_factor = 1.5
 u_lower_limit=700
 u_upper_limit=9000
+
+"""Motor force parameters"""
+motorForce=700
+
+"""Data aquisition and timing"""
+time_steps = 1000
 history = np.array( [[1000,-1000,0]] )
 time_history = np.array([[0]])
-time_steps = 10
-
-
 previous_pendulum_angle = 0
-previous_cart_position = 0
+previous_slider_position = 0
 
 """_____________________________________________________________________________________________________________________________"""
+"""Loading URDF files"""
+
+plane = p.loadURDF("plane.urdf")
+
 cubeStartPos = [-2.15,0,.75]
 cubeStartPos2 = [0,0,1.4]
 cubeStartPos3 = [2.15,0,.75]
@@ -59,6 +70,8 @@ for i in range(nJoints):
 last_tendon_link_1 = jointNameToId['tendon1_13_tendon1_14']
 cart_pendulumAxis = jointNameToId['cart_pendulumAxis']
 cart = jointNameToId['slider_cart']
+slider = jointNameToId['rail_slider']
+
 
 nJoints = p.getNumJoints(base_2)  #Base 2: white base and tendon
 jointNameToId = {}
@@ -96,6 +109,8 @@ for i in range (time_steps):
     p.stepSimulation()
     pendulum_angle = p.getJointState(pendulum,cart_pendulumAxis)
     pendulum_angle = pendulum_angle[0]
+    slider_position = p.getJointState(pendulum,slider)[0]
+    
     #print(pendulum_angle)
 
     angle_delta_error = -pendulum_angle
@@ -110,7 +125,21 @@ for i in range (time_steps):
     #DERIVATIVE
     d_correction = derivative_gain * angle_delta_error
 
+    """&&&&&&&&&&&&&&&&&&&&&&&&&&&&"""
+    #PROPPORTIONAL for cart position
+    p_correction_2 = proportional_gain_2 * slider_position
+
+    #INTEGRAL for cart position
+    i_correction_2 = integral_gain_2 * (previous_slider_position + slider_position)
+    previous_slider_position = slider_position
+
+    #DERIVATIVE for cart position
+    d_correction_2 = derivative_gain_2 * (-slider_position)
+    
+    """&&&&&&&&&&&&&&&&&&&&&&&&&&&&"""
+
     u = p_correction + i_correction + d_correction + 10
+    u_slider = p_correction_2 + i_correction_2 + d_correction_2
     
     u = abs(u)
     if u<u_lower_limit:
@@ -122,6 +151,7 @@ for i in range (time_steps):
     if pendulum_angle > 0:
       u_pulley_1 = u * u_factor   #Base 1: magenta base and tendon
       u_pulley_2 = -1000          #Base 2: white base and tendon
+      
       #print(">0")
     else:
       u_pulley_1 = 1000           #Base 1: magenta base and tendon
@@ -134,7 +164,7 @@ for i in range (time_steps):
 
     history = np.append(history , [[ u_pulley_1, u_pulley_2, pendulum_angle]] , axis = 0)    
 
-        
+    #print(p.getJointState(pendulum,slider)[0])   
     time.sleep(1./240.)
 
 print("Done with simulation")
