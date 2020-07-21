@@ -22,7 +22,7 @@ u_lower_limit=700
 u_upper_limit=9000
 history = np.array( [[1000,-1000,0]] )
 time_history = np.array([[0]])
-time_steps = 10
+time_steps = 5000
 
 
 previous_pendulum_angle = 0
