@@ -16,7 +16,7 @@ integral_gain = 18000
 derivative_gain = 22000
 
 """Gains to keep cart centered: """
-proportional_gain_2 = 8000
+proportional_gain_2 = 7
 integral_gain_2 = 0
 derivative_gain_2 = 0
 
@@ -28,12 +28,14 @@ u_upper_limit=9000
 """Motor force parameters"""
 motorForce=700
 
-"""Data aquisition and timing"""
-time_steps = 1000
+"""Data aquisition, timing and history"""
+time_steps = 4000
 history = np.array( [[1000,-1000,0]] )
 time_history = np.array([[0]])
 previous_pendulum_angle = 0
 previous_slider_position = 0
+u_pulley_1 = 1000
+u_pulley_2 = -1000
 
 """_____________________________________________________________________________________________________________________________"""
 """Loading URDF files"""
@@ -147,20 +149,41 @@ for i in range (time_steps):
     elif u>u_upper_limit:
       u=u_upper_limit   
     #print(u)
-    
-    if pendulum_angle > 0:
-      u_pulley_1 = u * u_factor   #Base 1: magenta base and tendon
-      u_pulley_2 = -1000          #Base 2: white base and tendon
-      
-      #print(">0")
-    else:
-      u_pulley_1 = 1000           #Base 1: magenta base and tendon
-      u_pulley_2 = -u * u_factor  #Base 2: white base and tendon
-      #print("<0")
 
+    
+    if slider_position >0:
+      u_pulley_1=1000
+      u_pulley_2 = u_pulley_2-u_slider
+      
+      print(u_pulley_2)
+    if slider_position <0:
+      u_pulley_1 = u_pulley_1-u_slider
+      u_pulley_2=-1000
+      
+      print(u_pulley_1)
+      
     p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_1)  #Base 1: magenta base and tendon
     p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_2)  #Base 2: white base and tendon
 
+    """      
+    if pendulum_angle > 0:
+      u_pulley_1 = u * u_factor   #Base 1: magenta base and tendon
+      #prev_u1 = u_pulley_1
+      u_pulley_2 = -1000          #Base 2: white base and tendon
+      #prev_u2 = u_pulley_2
+      #print(">0")
+    else:
+      u_pulley_1 = 1000           #Base 1: magenta base and tendon
+      #prev_u1 = u_pulley_1
+      u_pulley_2 = -u * u_factor  #Base 2: white base and tendon
+      #prev_u2 = u_pulley_2
+      #print("<0")
+
+
+
+    p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_1)  #Base 1: magenta base and tendon
+    p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_2)  #Base 2: white base and tendon
+    """
 
     history = np.append(history , [[ u_pulley_1, u_pulley_2, pendulum_angle]] , axis = 0)    
 
