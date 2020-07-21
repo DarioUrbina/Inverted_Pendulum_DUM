@@ -114,7 +114,6 @@ for i in range (time_steps):
     slider_position = p.getJointState(pendulum,slider)[0]
     
     #print(pendulum_angle)
-
     angle_delta_error = -pendulum_angle
 
     #PROPPORTIONAL
@@ -127,7 +126,7 @@ for i in range (time_steps):
     #DERIVATIVE
     d_correction = derivative_gain * angle_delta_error
 
-    """&&&&&&&&&&&&&&&&&&&&&&&&&&&&"""
+    """&&&&&&&&&&&&&&&&&&&&&&&&&&&&""""""
     #PROPPORTIONAL for cart position
     p_correction_2 = proportional_gain_2 * slider_position
 
@@ -138,10 +137,10 @@ for i in range (time_steps):
     #DERIVATIVE for cart position
     d_correction_2 = derivative_gain_2 * (-slider_position)
     
-    """&&&&&&&&&&&&&&&&&&&&&&&&&&&&"""
+    """"""&&&&&&&&&&&&&&&&&&&&&&&&&&&&"""
 
     u = p_correction + i_correction + d_correction + 10
-    u_slider = p_correction_2 + i_correction_2 + d_correction_2
+    #u_slider = p_correction_2 + i_correction_2 + d_correction_2
     
     u = abs(u)
     if u<u_lower_limit:
@@ -150,27 +149,26 @@ for i in range (time_steps):
       u=u_upper_limit   
     #print(u)
 
-    
+    """
     if slider_position >0:
-      u_pulley_1=1000
+      #u_pulley_1=1000
       u_pulley_2 = u_pulley_2-u_slider
+      #print(u_pulley_2)
       
-      print(u_pulley_2)
     if slider_position <0:
       u_pulley_1 = u_pulley_1-u_slider
-      u_pulley_2=-1000
-      
-      print(u_pulley_1)
-      
-    p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_1)  #Base 1: magenta base and tendon
-    p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_2)  #Base 2: white base and tendon
+      #u_pulley_2=-1000
+      #print(u_pulley_1)
+    """
+    
+    #p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_1)  #Base 1: magenta base and tendon
+    #p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_2)  #Base 2: white base and tendon
 
-    """      
+          
     if pendulum_angle > 0:
       u_pulley_1 = u * u_factor   #Base 1: magenta base and tendon
-      #prev_u1 = u_pulley_1
       u_pulley_2 = -1000          #Base 2: white base and tendon
-      #prev_u2 = u_pulley_2
+
       #print(">0")
     else:
       u_pulley_1 = 1000           #Base 1: magenta base and tendon
@@ -183,7 +181,7 @@ for i in range (time_steps):
 
     p.setJointMotorControl2(base_1, Base_pulley_1, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_1)  #Base 1: magenta base and tendon
     p.setJointMotorControl2(base_2, Base_pulley_2, p.VELOCITY_CONTROL, targetVelocity=100, force = u_pulley_2)  #Base 2: white base and tendon
-    """
+    
 
     history = np.append(history , [[ u_pulley_1, u_pulley_2, pendulum_angle]] , axis = 0)    
 
