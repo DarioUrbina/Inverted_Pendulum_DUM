@@ -11,18 +11,19 @@ plane = p.loadURDF("plane.urdf")
 
 """_____________________________________________________________________________________________________________________________"""
 """Gains and motor forces"""
-motorForce=700
+#motorForce = 700
+tension_force = 600
 proportional_gain = 30000
 integral_gain = 18000
 derivative_gain = 22000
 
 u_factor = 1.5
 
-u_lower_limit=700
+u_lower_limit =  tension_force
 u_upper_limit=9000
 history = np.array( [[1000,-1000,0]] )
 time_history = np.array([[0]])
-time_steps = 3000
+time_steps = 2000
 
 
 previous_pendulum_angle = 0
@@ -121,10 +122,10 @@ for i in range (time_steps):
     
     if pendulum_angle > 0:
       u_pulley_1 = u * u_factor   #Base 1: magenta base and tendon
-      u_pulley_2 = -1000          #Base 2: white base and tendon
+      u_pulley_2 = -tension_force          #Base 2: white base and tendon
       #print(">0")
     else:
-      u_pulley_1 = 1000           #Base 1: magenta base and tendon
+      u_pulley_1 = tension_force           #Base 1: magenta base and tendon
       u_pulley_2 = -u * u_factor  #Base 2: white base and tendon
       #print("<0")
 
